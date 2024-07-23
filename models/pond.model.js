@@ -57,7 +57,6 @@ class Pond {
     }
   }
 
-  // Delete a specific pond by pondId
   static async deletePond(pondId) {
     try {
       const pondRef = db.collection('ponddetail').doc(pondId);
