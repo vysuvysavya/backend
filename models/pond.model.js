@@ -3,9 +3,7 @@ const admin = require('firebase-admin');
 
 class Pond {
   constructor(pondId, i1, i2) {
-    this.pondId = pondId;
-    this.i1 = i1;
-    this.i2 = i2;
+    this.receivedString = this.receivedString;
   }
 
   // Save or update a pond detail
@@ -13,8 +11,7 @@ class Pond {
     try {
       const pondRef = db.collection('ponddetail').doc(pond.pondId);
       await pondRef.set({
-        i1: pond.i1,
-        i2: pond.i2,
+        receivedString: receivedString,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         updatedAt: admin.firestore.FieldValue.serverTimestamp()
       }, { merge: true }); // Merge to update existing fields
