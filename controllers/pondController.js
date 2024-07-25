@@ -1,8 +1,8 @@
 const Pond = require('../models/pond.model');
 
 const savePondHandler = async (req, res) => {
-  const { pondId, i1, i2 } = req.body;
-  const newPond = new Pond(pondId, i1, i2);
+  const { receivedString } = req.body;
+  const newPond = new Pond(receivedString);
   try {
     await Pond.savePondDetail(newPond);
     res.status(200).json({ message: 'Pond saved successfully.' });
@@ -13,7 +13,7 @@ const savePondHandler = async (req, res) => {
 
 const getPondHandler = async (req, res) => {
   try {
-    const pondDetail = await Pond.getPondDetail(req.params.pondId);
+    const pondDetail = await Pond.getPondDetail(req.id);
     if (pondDetail) {
       res.status(200).json(pondDetail);
     } else {
@@ -46,7 +46,7 @@ const updatePondHandler = async (req, res) => {
   try {
     const pondDetail = await Pond.getPondDetail(req.params.pondId);
     if (pondDetail) {
-      const updatedPond = new Pond(req.params.pondId, req.body.i1, req.body.i2);
+      const updatedPond = new Pond(req.body.receivedString);
       await Pond.savePondDetail(updatedPond);
       res.status(200).json({ message: 'Pond updated successfully.' });
     } else {
